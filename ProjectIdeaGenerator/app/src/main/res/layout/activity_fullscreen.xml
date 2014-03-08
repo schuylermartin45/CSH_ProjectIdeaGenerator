@@ -12,12 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:keepScreenOn="true"
-        android:textColor="#dfdfe5"
         android:textStyle="bold"
-        android:textSize="50sp"
+        android:textSize="40sp"
         android:gravity="center"
         android:background="#36e33f"
-        android:text="Test" />
+        android:text="Tap below to begin!"
+        android:textColor="#ffffff"
+        android:textIsSelectable="true" />
 
     <GridLayout
         android:layout_width="match_parent"
