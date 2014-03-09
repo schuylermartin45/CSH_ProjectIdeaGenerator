@@ -25,27 +25,48 @@ public abstract class IdeaGenerator
     */
     /*Probability Constants for events*/
     //probability of buzzword appearing
-    private static final double buzzProb = 0.40;
+    private static final double buzzProb = 0.50;
     //probability of picking a thing over a CSH project
+    //we want original ideas here, people!
     private static final double thingOrCSH = 0.70;
     //probability of picking a platform over a language
     private static final double platformOrLanguage = 0.60;
     //Arrays of words to choose from
     private static String[] descptArray = {
         "Musical","Automatic","Robotic","Computational","Mathematical","Functional","Configurable",
-        "Spelling","Inquisitive","Reliable"
+        "Spelling","Inquisitive","Reliable","Electric","Electronic-based", "Enterprise", "Super-duper",
+        "Mnemonic", "Integrated","Superior", "Thought-provoking", "Virtual", "Tactical", "Strategic",
+        "Technical", "Future-proofed", "Ethical", "Climatic", "Unacceptable", "Complicated",
+        "Over-engineered", "Tactic-cool", "Flexible", "Remote-controlled", "Wifi-enabled",
+        "Cutting-edge", "Digital", "Viral", "Bacon-flavored", "Trendy", "Ergonomic", "Extreme",
+        "Viable"
     };
     private static String[] CSHArray = {
-        "Drink","Media PC","Webnews","Members","ThunderDome","Ride Board","Segfault","Auto-Drink Admin"
+        "Drink","Media PC","Webnews","Members Database","ThunderDome","Ride Board","Segfault","Auto-Drink Admin",
+        "WaLLBoT", "Iron-Chef", "Arcade cabinets", "Gatekeeper", "Food Portal"
     };
     private static String[] thingArray = {
         "string parser","stairs","door","washing machine","school work scheduler","radio station","alarm clock",
-        "flat-bed scanner","music player","live stream","video game","fish bowl","simulator","XKCD reader",
-        "news feed","name generator","3D printer","data analyzer","fish feeder","candy machine"
+        "flat-bed scanner","music player","live stream","video game","fish bowl","cat simulator","XKCD reader",
+        "news feed","name generator","3D printer","data analyzer","fish feeder","candy machine","TV tuner","fan",
+        "wheel chair", "chair", "table-top RPG", "mp3 player", "code interpreter", "code compiler",
+        "network analyzer", "wifi hotspot", "speakers", "LED array", "LED controller", "LED cube", "flux capacitor",
+        "encryption scheme", "code library", "code plugin", "logging simulator", "catapult", "cat launcher", "rhythm game",
+        "FPS game", "indie game", "Nerf gun", "trash compactor", "personal drone", "personal assistant", "typewriter",
+        "pizza maker", "food cooker", "personal safe", "e-reader", "potato cannon", "ASL interpreter", "radar detector",
+        "bug zapper", "fish finder", "flying toaster", "model airplane", "video format", "artwork", "butt scratcher",
+        "synthesizer", "hammer", "Twitch Plays Pokemon", "clock", "point & click adventure", "card game",
+        "map-maker", "image manager", "vacuum cleaner", "window manager", "ssh client", "IM client", "IRC bot",
+        "IRC client", "light switch", "puzzle game", "physics engine", "calculator", "statistics service",
+        "file server", "lighting engine", "click-counter", "string manipulator", "puzzle solver", "news scraper",
+        "web scraper"
     };
     private static String[] buzzArray = {
         "scalable","cloud-based","social media","inovative","POSIX-compliant","robust",
-         "sustainable","synergy","data-mining","Web 2.0","REST-ful","Turing-complete"
+         "sustainable","synergy","data-mining","Web 2.0","REST-ful","Turing-complete","server-side",
+         "dynamically-allocated", "distributed computing", "BitCoin", "crypto-currency", "stream-lined",
+         "team-driven", "(such wow)", "Beekman-approved", "plug and play", "solar-powered", "hybrid",
+         "cost-containment", "voice recognition"
     };
     private static String[] prepArray = {
         "on","using","implemented with","implemented on"
@@ -57,11 +78,12 @@ public abstract class IdeaGenerator
         "Android","iOS","Windows","Mobile Devices","Chrome","Linux","OSX","Puppy Linux","Fedora",
         "Solaris","MySQL","CentOS","MS-DOS","Windows Phone","the web","MongoDB",
         "OpenStack","Tablets","VMs","Arduino","cross-platform","Vim","XML","JSON","JQuery","LaTeX",
-        "Kinect","NFC","Machine Learning","Regular Expressions"
+        "Kinect","NFC","Machine Learning","Regular Expressions", "Steam Box", "Maven", "IntelliJ",
+        "Google Glass", "Raspberry Pi", "genetic algorithms"
     };
     private static String[] languageArray= {
         "C","C#","C++","Python","Assembly","Java","JavaScript","BASIC","Pascal","Ruby","F#","Lisp",
-        "Shell-scripts","Objective-C","PEARL","PHP","Haskell","Hadoop"
+        "Shell-scripts", "Objective-C", "PEARL", "PHP", "Haskell", "Hadoop", "XNA", "Google DART"
     };
 
     //Picks a word at random from a list
