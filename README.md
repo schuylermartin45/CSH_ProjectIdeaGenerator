@@ -1,7 +1,10 @@
 CSH Project Idea Generator
 ====================
 
-Android app that generates project ideas. Planning on adding the ability to cache ideas locally and posting ideas to Facebook and Twitter.  
+Android app that generates project ideas. There's a stack for storing old ideas and you can share ideas to the world using Android's share button feature.
+
+Google Play Store:
+https://play.google.com/store/apps/details?id=com.projectideagenerator.app
 
 It's being developed via AndroidStudio on Linux for that good ol' fresh .gradle smell.
 
