@@ -74,10 +74,16 @@ public class FullscreenActivity extends Activity {
                     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(
                             new ContextThemeWrapper(v.getContext(), R.style.AppTheme));
                     alertBuilder.setMessage("Copied to clipboard!");
-                    AlertDialog alert = alertBuilder.show();
+                    final AlertDialog alert = alertBuilder.show();
                     //formatting
                     TextView message = (TextView)alert.findViewById(android.R.id.message);
                     message.setGravity(Gravity.CENTER);
+                    message.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alert.cancel();
+                        }
+                    });
                     //draw the dialog!
                     alert.show();
                 }
