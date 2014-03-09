@@ -173,7 +173,9 @@ public class FullscreenActivity extends ActionBarActivity {
         //pull of the stack
         if(theStack.size() > 0)
         {
-            intent.putExtra(Intent.EXTRA_TEXT,theStack.get(theStack.size()-1));
+            //Stuff to share + tagline 
+            intent.putExtra(Intent.EXTRA_TEXT,
+                    theStack.get(theStack.size()-1) + "-CSH Project Idea Generator");
         }
         else
         {
