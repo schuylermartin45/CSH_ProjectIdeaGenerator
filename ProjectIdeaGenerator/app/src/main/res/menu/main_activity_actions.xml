@@ -1,13 +1,18 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:yourapp="http://schemas.android.com/apk/res-auto"
+>
     <!-- Share -->
     <item android:id="@+id/actionShare"
         android:icon="@android:drawable/ic_menu_share"
+        yourapp:showAsAction="ifRoom"
+        yourapp:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        />
 
-        android:showAsAction="ifRoom" />
     <!-- Settings -->
     <item android:id="@+id/actionSettings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="About"
-        android:showAsAction="never"
-        android:theme="@style/AppTheme" />
+        yourapp:showAsAction="never"
+        />
 </menu>

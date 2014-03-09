@@ -6,12 +6,14 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="CSH Projects"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Theme.AppCompat" >
         <activity
             android:name="com.projectideagenerator.app.FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="CSH Projects"
-            android:theme="@style/FullscreenTheme" >
+            android:theme="@style/Theme.AppCompat"
+            >
+            <!--Theme.AppCompat.Light.DarkActionBar" -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

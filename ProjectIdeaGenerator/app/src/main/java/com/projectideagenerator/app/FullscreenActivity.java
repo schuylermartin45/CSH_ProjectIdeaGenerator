@@ -2,29 +2,25 @@ package com.projectideagenerator.app;
 
 import com.projectideagenerator.app.util.SystemUiHider;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
+//import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.graphics.Path;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.v4.view.MenuItemCompat;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.widget.Button;
+import android.support.v7.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.content.DialogInterface;
-
-import org.w3c.dom.Text;
+import android.content.Intent;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -32,7 +28,7 @@ import java.util.Stack;
  *
  * @see SystemUiHider
  */
-public class FullscreenActivity extends Activity {
+public class FullscreenActivity extends ActionBarActivity {
 
     //Button objects that stem from the GUI
     private Button generateBtn;
@@ -44,6 +40,8 @@ public class FullscreenActivity extends Activity {
     private ArrayList<String> theStack;
     //Max size of the stack
     private final int MAXSTACK = 50;
+    //share button control system...thanks Google!
+    private ShareActionProvider shareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,13 +150,26 @@ public class FullscreenActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_activity_actions, menu);
-
+        getMenuInflater().inflate(R.menu.main_activity_actions, menu);
+        MenuItem shareItem = menu.findItem(R.id.actionShare);
         //Share button
-        //MenuItem shareItem = (MenuItem)menu.findItem(R.id.actionShare);
-        //shareItem.setActionProvider();
+        shareActionProvider =
+                (ShareActionProvider)MenuItemCompat.getActionProvider(shareItem);
+        shareActionProvider.setShareIntent(getDefaultIntent());
         return(super.onCreateOptionsMenu(menu));
+    }
+
+    /**
+     * Passes the string along to the ActionProvider to give it to Facederp, G+, etc.
+     * @return Intent
+     */
+    private Intent getDefaultIntent() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TITLE,"CSH Project Idea Generator");
+        intent.putExtra(Intent.EXTRA_TEXT,ideaDisp.getText());
+        //startActivity();
+        return(intent);
     }
 
     //Handles about button...much simpler than using an ActivityProvider
