@@ -10,9 +10,11 @@ import android.content.ClipboardManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.ContextThemeWrapper;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.widget.ArrayAdapter;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Button;
 import android.widget.TextView;
 import android.content.DialogInterface;
@@ -89,7 +91,8 @@ public class FullscreenActivity extends Activity {
             public void onClick(View v)
             {
                 //Dialog to put ListView in
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(v.getContext());
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(
+                        new ContextThemeWrapper(v.getContext(), R.style.AppTheme));
                 alertBuilder.setTitle("Previous ideas:");
                 //control the list visuals
                 final String[] listToShow;
@@ -123,6 +126,42 @@ public class FullscreenActivity extends Activity {
                 alert.show();
             }
         });
+    }
+
+    //The part that handles the action bar buttons
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_actions, menu);
+
+        //Share button
+        //MenuItem shareItem = (MenuItem)menu.findItem(R.id.actionShare);
+        //shareItem.setActionProvider();
+        return(super.onCreateOptionsMenu(menu));
+    }
+
+    //Handles about button...much simpler than
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.actionSettings)
+        {
+            //build a simple dialog block with some stuff
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(
+                    new ContextThemeWrapper(this, R.style.AppTheme));
+            alertBuilder.setTitle("CSH Project Idea Generator");
+            alertBuilder.setMessage(
+                    "Created by:\n" +
+                    "Schuyler Martin\n\n" +
+                    "CSHer and student at RIT\n" +
+                    "GitHub: schuylermartin45\n\n" +
+                    "Open source since 2014\n"
+            );
+            AlertDialog alert = alertBuilder.create();
+            alert.show();
+            return(true);
+        }
+        return(false);
     }
 
     @Override
