@@ -96,6 +96,7 @@ public class FullscreenActivity extends ActionBarActivity {
                 ideaDisp.setText(idea);
                 //idea is stored
                 theStack.add(idea);
+                updateShareIntent();
                 //exceed the max, the remove from the end...
                 if(theStack.size() > MAXSTACK)
                 {
@@ -155,7 +156,8 @@ public class FullscreenActivity extends ActionBarActivity {
         //Share button
         shareActionProvider =
                 (ShareActionProvider)MenuItemCompat.getActionProvider(shareItem);
-        shareActionProvider.setShareIntent(getDefaultIntent());
+        Intent shareIntent = getDefaultIntent();
+        shareActionProvider.setShareIntent(shareIntent);
         return(super.onCreateOptionsMenu(menu));
     }
 
@@ -163,13 +165,33 @@ public class FullscreenActivity extends ActionBarActivity {
      * Passes the string along to the ActionProvider to give it to Facederp, G+, etc.
      * @return Intent
      */
-    private Intent getDefaultIntent() {
+    private Intent getDefaultIntent()
+    {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TITLE,"CSH Project Idea Generator");
-        intent.putExtra(Intent.EXTRA_TEXT,ideaDisp.getText());
-        //startActivity();
+        //pull of the stack
+        if(theStack.size() > 0)
+        {
+            intent.putExtra(Intent.EXTRA_TEXT,theStack.get(theStack.size()-1));
+        }
+        else
+        {
+            //default
+            intent.putExtra(Intent.EXTRA_TEXT,"No ideas!");
+        }
         return(intent);
+    }
+
+    /**
+     * Update the share intent
+     */
+    private void updateShareIntent()
+    {
+        if (shareActionProvider != null)
+        {
+            shareActionProvider.setShareIntent(getDefaultIntent());
+        }
     }
 
     //Handles about button...much simpler than using an ActivityProvider
