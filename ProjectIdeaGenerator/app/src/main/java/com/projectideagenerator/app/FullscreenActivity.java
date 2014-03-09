@@ -7,10 +7,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.graphics.Path;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -18,6 +20,8 @@ import android.view.MenuInflater;
 import android.widget.Button;
 import android.widget.TextView;
 import android.content.DialogInterface;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -66,6 +70,16 @@ public class FullscreenActivity extends Activity {
                         (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
                     ClipData clipData = ClipData.newPlainText("CSHProjectText",ideaDisp.getText());
                     clipboardManager.setPrimaryClip(clipData);
+                    //Tell the user!
+                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(
+                            new ContextThemeWrapper(v.getContext(), R.style.AppTheme));
+                    alertBuilder.setMessage("Copied to clipboard!");
+                    AlertDialog alert = alertBuilder.show();
+                    //formatting
+                    TextView message = (TextView)alert.findViewById(android.R.id.message);
+                    message.setGravity(Gravity.CENTER);
+                    //draw the dialog!
+                    alert.show();
                 }
             }
         });
@@ -141,7 +155,7 @@ public class FullscreenActivity extends Activity {
         return(super.onCreateOptionsMenu(menu));
     }
 
-    //Handles about button...much simpler than
+    //Handles about button...much simpler than using an ActivityProvider
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.actionSettings)
