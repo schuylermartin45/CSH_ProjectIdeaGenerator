@@ -186,9 +186,19 @@ public class FullscreenActivity extends ActionBarActivity {
                     "Schuyler Martin\n\n" +
                     "CSHer and student at RIT\n" +
                     "GitHub: schuylermartin45\n\n" +
-                    "Open source since 2014\n"
+                    "Open source since 2014"
             );
-            AlertDialog alert = alertBuilder.create();
+            final AlertDialog alert = alertBuilder.show();
+            //formatting
+            TextView message = (TextView)alert.findViewById(android.R.id.message);
+            message.setGravity(Gravity.LEFT);
+            //Hide on click
+            message.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alert.cancel();
+                }
+            });
             alert.show();
             return(true);
         }
