@@ -25,7 +25,7 @@ public abstract class IdeaGenerator
     */
     /*Probability Constants for events*/
     //probability of buzzword appearing
-    private static final double buzzProb = 0.30;
+    private static final double buzzProb = 0.40;
     //probability of picking a thing over a CSH project
     private static final double thingOrCSH = 0.70;
     //probability of picking a platform over a language
@@ -33,22 +33,25 @@ public abstract class IdeaGenerator
     //Arrays of words to choose from
     private static String[] descptArray = {
         "Musical","Automatic","Robotic","Computational","Mathematical","Functional","Configurable",
-        "Spelling","Inquisitive"
+        "Spelling","Inquisitive","Reliable"
     };
     private static String[] CSHArray = {
-        "Drink","Media PC","Webnews","Members","ThunderDome","Ride Board","Segfault"
+        "Drink","Media PC","Webnews","Members","ThunderDome","Ride Board","Segfault","Auto-Drink Admin"
     };
     private static String[] thingArray = {
-        "parser","stairs","door","washing machines","school work","radio station","alarm clock",
-        "scanner","music player","live stream","video game","fish bowl","simulator","XKCD reader",
-        "news feed"
+        "string parser","stairs","door","washing machine","school work scheduler","radio station","alarm clock",
+        "flat-bed scanner","music player","live stream","video game","fish bowl","simulator","XKCD reader",
+        "news feed","name generator","3D printer","data analyzer","fish feeder","candy machine"
     };
     private static String[] buzzArray = {
         "scalable","cloud-based","social media","inovative","POSIX-compliant","robust",
          "sustainable","synergy","data-mining","Web 2.0","REST-ful","Turing-complete"
     };
     private static String[] prepArray = {
-        "but on","on","using","but using","implemented with","implemented on"
+        "on","using","implemented with","implemented on"
+    };
+    private static String[] CSHprepArray = {
+        "but on", "but using","but with"
     };
     private static String[] platformArray = {
         "Android","iOS","Windows","Mobile Devices","Chrome","Linux","OSX","Puppy Linux","Fedora",
@@ -58,7 +61,7 @@ public abstract class IdeaGenerator
     };
     private static String[] languageArray= {
         "C","C#","C++","Python","Assembly","Java","JavaScript","BASIC","Pascal","Ruby","F#","Lisp",
-        "Shell-scripts","Objective-C","PEARL","PHP","Haskell"
+        "Shell-scripts","Objective-C","PEARL","PHP","Haskell","Hadoop"
     };
 
     //Picks a word at random from a list
@@ -79,7 +82,7 @@ public abstract class IdeaGenerator
     public static String generateIdea()
     {
         //Logic of a phrase:
-        //D B* (T || (Pr && C)) (Pr && (Pl || L))
+        //D B* (T || C)) (Pr && (Pl || L))
         String idea = "";
         idea += wordFromList(descptArray);
         if(ranNum.nextDouble() <= buzzProb)
@@ -89,12 +92,13 @@ public abstract class IdeaGenerator
         if(ranNum.nextDouble() <= thingOrCSH)
         {
             idea += wordFromList(thingArray);
+            idea += wordFromList(prepArray);
         }
         else
         {
             idea += wordFromList(CSHArray);
+            idea += wordFromList(CSHprepArray);
         }
-        idea += wordFromList(prepArray);
         if(ranNum.nextDouble() <= platformOrLanguage)
         {
             idea += wordFromList(platformArray);
@@ -104,5 +108,36 @@ public abstract class IdeaGenerator
             idea += wordFromList(languageArray);
         }
         return(idea);
+    }
+
+    /**
+     * Counts current number of ideas possible
+     * @return The number of ideas possible
+     */
+    public static int calculateIdeas()
+    {
+        //Logic of a phrase:
+        //D B* (T || C)) (Pr && (Pl || L))
+        //over used
+        int descSize = descptArray.length;
+        int buzzSize = buzzArray.length;
+        int platSize = platformArray.length;
+        int langSize = languageArray.length;
+        //smaller calculations
+        int thingAndPrep = thingArray.length * prepArray.length;
+        int CSHAndPrep = CSHArray.length * CSHprepArray.length;
+        //bigger calcs (of independent scenarios types)
+        //things
+        int DTPl = descSize * thingAndPrep * platSize;
+        int DTL = descSize * thingAndPrep * langSize;
+        int DBTPl = descSize * buzzSize * thingAndPrep * platSize;
+        int DBTL = descSize * buzzSize * thingAndPrep * langSize;
+        //CSH things
+        int DCPl = descSize * CSHAndPrep * platSize;
+        int DCL = descSize * CSHAndPrep * langSize;
+        int DCTPl = descSize * buzzSize * CSHAndPrep * platSize;
+        int DCTL = descSize * buzzSize * CSHAndPrep * langSize;
+        int num = DTPl + DTL + DBTPl + DBTL + DCPl + DCL + DCTPl + DCTL;
+        return(num);
     }
 }

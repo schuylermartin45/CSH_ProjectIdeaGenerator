@@ -21,6 +21,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import java.util.ArrayList;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -216,6 +218,30 @@ public class FullscreenActivity extends ActionBarActivity {
             //formatting
             TextView message = (TextView)alert.findViewById(android.R.id.message);
             message.setGravity(Gravity.LEFT);
+            //Hide on click
+            message.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alert.cancel();
+                }
+            });
+            alert.show();
+            return(true);
+        }
+        if(item.getItemId() == R.id.actionTotalNum)
+        {
+            //build a simple dialog block with some stuff
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(
+                    new ContextThemeWrapper(this, R.style.AppTheme));
+            alertBuilder.setTitle("Total Number of Ideas Possible:");
+            //format large numbers based on current locale
+            alertBuilder.setMessage(
+                    NumberFormat.getNumberInstance(getResources().getConfiguration().locale)
+                    .format(IdeaGenerator.calculateIdeas()));
+            final AlertDialog alert = alertBuilder.show();
+            //formatting
+            TextView message = (TextView)alert.findViewById(android.R.id.message);
+            message.setGravity(Gravity.CENTER);
             //Hide on click
             message.setOnClickListener(new View.OnClickListener() {
                 @Override

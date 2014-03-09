@@ -9,10 +9,16 @@
         yourapp:actionProviderClass="android.support.v7.widget.ShareActionProvider"
         />
 
-    <!-- Settings -->
+    <!-- About -->
     <item android:id="@+id/actionSettings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="About"
+        yourapp:showAsAction="never"
+        />
+    <!-- TotalNum -->
+    <item android:id="@+id/actionTotalNum"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Number of Ideas"
         yourapp:showAsAction="never"
         />
 </menu>
