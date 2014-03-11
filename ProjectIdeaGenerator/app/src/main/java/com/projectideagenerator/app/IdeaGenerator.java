@@ -69,10 +69,10 @@ public abstract class IdeaGenerator
          "cost-containment", "voice recognition"
     };
     private static String[] prepArray = {
-        "on","using","implemented with","implemented on"
+        "on","using","implemented with","implemented using"
     };
     private static String[] CSHprepArray = {
-        "but on", "but using","but with"
+        "but on", "but using","but implemented with"
     };
     private static String[] platformArray = {
         "Android","iOS","Windows","Mobile Devices","Chrome","Linux","OSX","Puppy Linux","Fedora",

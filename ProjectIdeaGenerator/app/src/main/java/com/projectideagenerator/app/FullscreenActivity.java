@@ -98,7 +98,8 @@ public class FullscreenActivity extends ActionBarActivity {
                 ideaDisp.setText(idea);
                 //idea is stored
                 theStack.add(idea);
-                updateShareIntent();
+                //what to share later (top of the stack)
+                updateShareIntent(theStack.get(theStack.size()-1));
                 //exceed the max, the remove from the end...
                 if(theStack.size() > MAXSTACK)
                 {
@@ -140,6 +141,8 @@ public class FullscreenActivity extends ActionBarActivity {
                         {
                             //clicking an item in the list will draw it back on the screen
                             ideaDisp.setText(listToShow[item]);
+                            //what to share later (the item that is currently on the screen)
+                            updateShareIntent(listToShow[item]);
                         }
                     }
                 });
@@ -158,7 +161,7 @@ public class FullscreenActivity extends ActionBarActivity {
         //Share button
         shareActionProvider =
                 (ShareActionProvider)MenuItemCompat.getActionProvider(shareItem);
-        Intent shareIntent = getDefaultIntent();
+        Intent shareIntent = getDefaultIntent("You have no ideas!");
         shareActionProvider.setShareIntent(shareIntent);
         return(super.onCreateOptionsMenu(menu));
     }
@@ -167,7 +170,7 @@ public class FullscreenActivity extends ActionBarActivity {
      * Passes the string along to the ActionProvider to give it to Facederp, G+, etc.
      * @return Intent
      */
-    private Intent getDefaultIntent()
+    private Intent getDefaultIntent(String idea)
     {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
@@ -176,8 +179,7 @@ public class FullscreenActivity extends ActionBarActivity {
         if(theStack.size() > 0)
         {
             //Stuff to share + tagline 
-            intent.putExtra(Intent.EXTRA_TEXT,
-                    theStack.get(theStack.size()-1) + "-CSH Project Idea Generator");
+            intent.putExtra(Intent.EXTRA_TEXT, idea + "-CSH Project Idea Generator");
         }
         else
         {
@@ -190,11 +192,11 @@ public class FullscreenActivity extends ActionBarActivity {
     /**
      * Update the share intent
      */
-    private void updateShareIntent()
+    private void updateShareIntent(String idea)
     {
         if (shareActionProvider != null)
         {
-            shareActionProvider.setShareIntent(getDefaultIntent());
+            shareActionProvider.setShareIntent(getDefaultIntent(idea));
         }
     }
 
