@@ -2,6 +2,7 @@ package com.projectideagenerator.app;
 
 import com.projectideagenerator.app.util.SystemUiHider;
 
+import android.content.pm.PackageManager;
 import android.support.v7.app.ActionBarActivity;
 //import android.app.Activity;
 import android.app.AlertDialog;
@@ -71,21 +72,7 @@ public class FullscreenActivity extends ActionBarActivity {
                     ClipData clipData = ClipData.newPlainText("CSHProjectText",ideaDisp.getText());
                     clipboardManager.setPrimaryClip(clipData);
                     //Tell the user!
-                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(
-                            new ContextThemeWrapper(v.getContext(), R.style.AppTheme));
-                    alertBuilder.setMessage("Copied to clipboard!");
-                    final AlertDialog alert = alertBuilder.show();
-                    //formatting
-                    TextView message = (TextView)alert.findViewById(android.R.id.message);
-                    message.setGravity(Gravity.CENTER);
-                    message.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alert.cancel();
-                        }
-                    });
-                    //draw the dialog!
-                    alert.show();
+                    displayStandardDialog(null, "Copied to clipboard!");
                 }
             }
         });
@@ -205,56 +192,63 @@ public class FullscreenActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.actionSettings)
         {
-            //build a simple dialog block with some stuff
-            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(
-                    new ContextThemeWrapper(this, R.style.AppTheme));
-            alertBuilder.setTitle("CSH Project Idea Generator");
-            alertBuilder.setMessage(
+            //get the version of the app in the form of a string
+            String version = "";
+            try
+            {
+                version = "v" +
+                        getPackageManager().getPackageInfo(getPackageName(),0).versionName + "\n";
+            }
+            catch(PackageManager.NameNotFoundException ex)
+            {
+                ex.printStackTrace();
+            }
+            String messageTxt =
+                    version +
                     "Created by:\n" +
                     "Schuyler Martin\n\n" +
                     "CSHer and student at RIT\n" +
                     "GitHub: schuylermartin45\n\n" +
-                    "Open source since 2014"
-            );
-            final AlertDialog alert = alertBuilder.show();
-            //formatting
-            TextView message = (TextView)alert.findViewById(android.R.id.message);
-            message.setGravity(Gravity.LEFT);
-            //Hide on click
-            message.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    alert.cancel();
-                }
-            });
-            alert.show();
+                    "Open source since 2014";
+            displayStandardDialog("CSH Project Idea Generator", messageTxt);
             return(true);
         }
         if(item.getItemId() == R.id.actionTotalNum)
         {
-            //build a simple dialog block with some stuff
-            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(
-                    new ContextThemeWrapper(this, R.style.AppTheme));
-            alertBuilder.setTitle("Total Number of Ideas Possible:");
-            //format large numbers based on current locale
-            alertBuilder.setMessage(
+            displayStandardDialog("Total Number of Ideas Possible:",
                     NumberFormat.getNumberInstance(getResources().getConfiguration().locale)
                     .format(IdeaGenerator.calculateIdeas()));
-            final AlertDialog alert = alertBuilder.show();
-            //formatting
-            TextView message = (TextView)alert.findViewById(android.R.id.message);
-            message.setGravity(Gravity.CENTER);
-            //Hide on click
-            message.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    alert.cancel();
-                }
-            });
-            alert.show();
             return(true);
         }
         return(false);
+    }
+
+    /**
+     * Clean up the process for generating the "standard" dialog/message
+     * box for this program
+     * These dialogs share a common style and disappear when the message gets tapped on
+     * @param titleTxt Title of the dialog
+     * @param messageTxt Body text of the dialog
+     */
+    private void displayStandardDialog(String titleTxt, String messageTxt)
+    {
+        //build a simple dialog block with some stuff
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(
+                new ContextThemeWrapper(this, R.style.AppTheme));
+        alertBuilder.setTitle(titleTxt);
+        alertBuilder.setMessage(messageTxt);
+        final AlertDialog alert = alertBuilder.show();
+        //formatting
+        TextView message = (TextView)alert.findViewById(android.R.id.message);
+        message.setGravity(Gravity.CENTER);
+        //Hide on click
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.cancel();
+            }
+        });
+        alert.show();
     }
 
     @Override
