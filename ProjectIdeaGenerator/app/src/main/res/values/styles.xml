@@ -1,26 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Define Color Constants -->
+    <color name="csh_white">#eff1df</color>
+    <color name="csh_black">#464646</color>
+    <color name="pdp_purple">#A3265D</color>
+    <color name="pdp_purple_light">#BD2873</color>
+    <color name="pdp_pink">#F23A71</color>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!-- This auto-magically overrides the look of the share button -->
+    <style name="Widget.Sherlock.ListPopupWindow" parent="android:Widget">
+        <item name="android:popupBackground">@color/pdp_purple_light</item>
     </style>
 
-    <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@null</item>
-        <item name="metaButtonBarStyle">@style/ButtonBar</item>
-        <item name="metaButtonBarButtonStyle">@style/ButtonBarButton</item>
+    <!-- Colors actually based on a PDP-11
+        Used a reference photo to get the correct color values -->
+    <!-- Base CSH theme. -->
+    <style name="CSHTheme" parent="@style/Theme.AppCompat">
+        <!-- CSH Bar -->
+        <item name="android:actionBarStyle">@style/CSHBar</item>
+        <item name="listPopupWindowStyle">@style/Widget.Sherlock.ListPopupWindow</item>
+        <item name="android:actionDropDownStyle">@style/CSHShare</item>
+        <item name="android:textColor">@color/csh_white</item>
+        <item name="android:popupMenuStyle">@style/CSHPref</item>
+        <!--<item name="android:buttonStyle">@style/CSHBtn</item> -->
     </style>
 
-    <style name="ButtonBar">
-        <item name="android:paddingLeft">2dp</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingRight">2dp</item>
-        <item name="android:paddingBottom">0dp</item>
-        <item name="android:background">@android:drawable/bottom_bar</item>
+    <!-- ActionBar Themed like CSH. -->
+    <style name="CSHBar" parent="@style/Widget.AppCompat.ActionBar">
+            <item name="android:background">@color/pdp_purple</item>
+            <item name="android:textColor">@color/csh_black</item>
     </style>
 
-    <style name="ButtonBarButton" />
+    <style name="CSHPref" parent="android:style/Widget.Holo.Light.ListPopupWindow">
+        <item name="android:popupBackground">@color/pdp_purple_light</item>
+        <item name="android:textColor">@color/csh_white</item>
+    </style>
+
+    <style name="CSHShare" parent="android:style/Widget.Holo.Light.ListPopupWindow">
+        <item name="android:popupBackground">@color/pdp_purple_light</item>
+        <item name="android:textColor">@color/csh_white</item>
+        <item name="android:itemBackground">@color/pdp_purple_light</item>
+        <item name="android:actionBarItemBackground">@color/pdp_purple_light</item>
+    </style>
+
+    <!-- Buttons Themed like CSH. Stopped using this due to lots of purple-ness
+    <style name="CSHBtn" parent="android:Theme.Light">
+        <item name="android:background">#A3265D</item>
+    </style> -->
+
+    <!-- Custom Style for alert layouts -->
+    <style name="CSHDialog" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:textColor">@color/pdp_purple</item>
+    </style>
 
 </resources>

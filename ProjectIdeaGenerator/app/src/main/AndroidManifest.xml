@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto"
     package="com.projectideagenerator.app"
     android:versionCode="2"
     android:versionName="1.1"
@@ -10,13 +11,13 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="CSH Projects"
-        android:theme="@style/Theme.AppCompat" >
+        >
         <activity
             android:name="com.projectideagenerator.app.FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:icon="@drawable/ic_launcher"
             android:label="CSH Projects"
-            android:theme="@style/Theme.AppCompat"
+            android:theme="@style/CSHTheme"
             >
             <!--Theme.AppCompat.Light.DarkActionBar" -->
             <intent-filter>

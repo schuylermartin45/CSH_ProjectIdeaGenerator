@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#11990a"
+    android:background="@color/csh_white"
     tools:context="com.projectideagenerator.app.FullscreenActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -15,10 +15,11 @@
         android:textStyle="bold"
         android:textSize="40sp"
         android:gravity="center"
-        android:background="#36e33f"
+        android:background="@color/csh_white"
         android:text="Tap below to begin!"
-        android:textColor="#ffffff"
-        android:textIsSelectable="true" />
+        android:textColor="@color/csh_black"
+        android:textIsSelectable="true"
+        android:autoText="false" />
 
     <GridLayout
         android:layout_width="match_parent"

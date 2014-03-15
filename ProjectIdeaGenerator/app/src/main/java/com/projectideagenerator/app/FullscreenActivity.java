@@ -4,7 +4,6 @@ import com.projectideagenerator.app.util.SystemUiHider;
 
 import android.content.pm.PackageManager;
 import android.support.v7.app.ActionBarActivity;
-//import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -101,7 +100,7 @@ public class FullscreenActivity extends ActionBarActivity {
             {
                 //Dialog to put ListView in
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(
-                        new ContextThemeWrapper(v.getContext(), R.style.AppTheme));
+                        new ContextThemeWrapper(v.getContext(), R.style.CSHDialog));
                 alertBuilder.setTitle("Previous ideas:");
                 //control the list visuals
                 final String[] listToShow;
@@ -234,9 +233,10 @@ public class FullscreenActivity extends ActionBarActivity {
     {
         //build a simple dialog block with some stuff
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(
-                new ContextThemeWrapper(this, R.style.AppTheme));
+                new ContextThemeWrapper(this, R.style.CSHDialog));
         alertBuilder.setTitle(titleTxt);
         alertBuilder.setMessage(messageTxt);
+
         final AlertDialog alert = alertBuilder.show();
         //formatting
         TextView message = (TextView)alert.findViewById(android.R.id.message);
